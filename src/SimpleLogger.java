@@ -6,7 +6,19 @@ import java.time.format.DateTimeFormatter;
 
 public class SimpleLogger {
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static SimpleLogger aLogger = null;
     private static final String LOG_FILE = "application.log";
+    
+    private SimpleLogger() {
+
+    }
+
+    public static SimpleLogger getInstance() {
+        if (aLogger == null) {
+            aLogger = new SimpleLogger();
+        }
+        return aLogger;
+    }
 
     public void logThis(String pMessage, String pLogLevel) {
         String timeStamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
